@@ -76,6 +76,88 @@
             flex-direction: column;
             align-items: center;
         }
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fadeInSlideUp {
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+        }
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .collapsible-content.open {
+            max-height: 500px; /* Adjust as needed, should be larger than content */
+            transition: max-height 0.5s ease-in;
+        }
+        .workflow-btn .icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .workflow-btn.open .icon {
+            transform: rotate(45deg);
+        }
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #d4b996;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+            z-index: 0;
+        }
+        .timeline-step {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-step::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 2px solid #d4b996;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            left: 50%;
+        }
+        .right::after {
+            left: -16px;
+        }
+        .left::after {
+            left: auto;
+            right: -16px;
+        }
+        .content-box {
+            padding: 20px 30px;
+            background-color: #fff;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body class="text-[#555B6E]">
@@ -152,7 +234,7 @@
                         </ul>
                     </div>
                     <div class="bg-white rounded-lg shadow-md p-6">
-                        <h3 class="text-xl font-bold text-[#D4B996] mb-4">Mining and Exploration</h3>
+                        <h3 class="text-xl font-bold text-[#D55B6E] mb-4">Mining and Exploration</h3>
                         <p class="text-[#555B6E] text-sm mb-4">We deliver essential data for mining operations, helping to optimize resource extraction and ensure compliance with environmental regulations.</p>
                         <h4 class="font-bold text-[#36454F] mb-2">Services Include:</h4>
                         <ul class="list-disc list-inside text-left mx-auto max-w-xs space-y-1 text-sm text-[#555B6E]">
@@ -175,19 +257,51 @@
             </div>
         </section>
 
-        
         <section id="workflow" class="py-16">
             <h2 class="text-3xl font-bold text-center text-[#36454F] mb-12">Our Proven Project Workflow</h2>
-            <div class="flex flex-col md:flex-row items-stretch justify-center gap-0">
-                <div class="flow-step flex-1 p-4 bg-gray-100 text-gray-700">1. Consultation</div>
-                <div class="flow-arrow text-gray-400 self-center mx-2 hidden md:block">→</div>
-                <div class="flow-step flex-1 p-4 bg-gray-200 text-gray-800">2. Planning</div>
-                <div class="flow-arrow text-gray-400 self-center mx-2 hidden md:block">→</div>
-                <div class="flow-step flex-1 p-4 bg-gray-300 text-gray-800">3. Data Acquisition</div>
-                <div class="flow-arrow text-gray-500 self-center mx-2 hidden md:block">→</div>
-                <div class="flow-step flex-1 p-4 bg-gray-600 text-white">4. Processing</div>
-                <div class="flow-arrow text-gray-700 self-center mx-2 hidden md:block">→</div>
-                <div class="flow-step flex-1 p-4 bg-gray-800 text-white">5. Delivery</div>
+            <div class="timeline-container">
+                <div class="timeline-step left">
+                    <div class="content-box">
+                        <h3 class="text-xl font-bold text-[#d4b996] mb-2">Reach out and tell us your idea</h3>
+                        <p class="text-sm text-gray-600">We take emails, phone calls, messages, everything! If you are unsure of what's possible we are happy to advise, the most important thing is to get in touch. We'll be happy to answer any questions you may have.</p>
+                    </div>
+                </div>
+                <div class="timeline-step right">
+                    <div class="content-box">
+                        <h3 class="text-xl font-bold text-[#d4b996] mb-2">Start at the end</h3>
+                        <p class="text-sm text-gray-600">With drones, it's best to begin where you want to end up. What sort of deliverable would you like when it's all finished? If you are not sure then we can advise. We can look at what you would like and work backwards from there.</p>
+                    </div>
+                </div>
+                <div class="timeline-step left">
+                    <div class="content-box">
+                        <h3 class="text-xl font-bold text-[#d4b996] mb-2">Scope of work and set a price</h3>
+                        <p class="text-sm text-gray-600">Once we have agreed on what is to be done, the scope of work is set and a price is agreed upon. We feel it is vital that everyone knows what they are getting and what they are paying for it. There should be no confusion.</p>
+                    </div>
+                </div>
+                <div class="timeline-step right">
+                    <div class="content-box">
+                        <h3 class="text-xl font-bold text-[#d4b996] mb-2">Permits and other paperwork</h3>
+                        <p class="text-sm text-gray-600">Once we have confirmation you are happy to proceed, we start the ball rolling. We organise things like RAMS, site permits, Air Traffic Control clearance and much more. Basically, we generate everything needed to turn up on-site with all our ducks in a row.</p>
+                    </div>
+                </div>
+                <div class="timeline-step left">
+                    <div class="content-box">
+                        <h3 class="text-xl font-bold text-[#d4b996] mb-2">Field Operations</h3>
+                        <p class="text-sm text-gray-600">Next, we do the work on site. We have the gear, we have the know-how, so now it's time to get the job done. This can sometimes be affected by the weather, but for the most part, we get the job done on the date specified.</p>
+                    </div>
+                </div>
+                <div class="timeline-step right">
+                    <div class="content-box">
+                        <h3 class="text-xl font-bold text-[#d4b996] mb-2">Post Processing</h3>
+                        <p class="text-sm text-gray-600">This is where we take what we generated in the field and turn it into a final deliverable for you. This can be anything from the raw data itself, to fully processed Orthophotos, condition reports, CAD line work or thermal imagery.</p>
+                    </div>
+                </div>
+                <div class="timeline-step left">
+                    <div class="content-box">
+                        <h3 class="text-xl font-bold text-[#d4b996] mb-2">Handover</h3>
+                        <p class="text-sm text-gray-600">The final step is the handover of the deliverables. We tend to use a cloud-based service, so you can access your data anywhere. We can also tie into your existing systems if that is more convenient.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -326,6 +440,29 @@
             showIndustriesBtn.addEventListener('click', () => {
                 industriesDetails.classList.remove('hidden');
                 showIndustriesBtn.classList.add('hidden');
+            });
+
+            const workflowButtons = document.querySelectorAll('.workflow-btn');
+            workflowButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.icon');
+
+                    if (content.classList.contains('open')) {
+                        content.classList.remove('open');
+                        icon.textContent = '+';
+                        button.classList.remove('open');
+                    } else {
+                        document.querySelectorAll('.collapsible-content.open').forEach(item => {
+                            item.classList.remove('open');
+                            item.previousElementSibling.querySelector('.icon').textContent = '+';
+                            item.previousElementSibling.classList.remove('open');
+                        });
+                        content.classList.add('open');
+                        icon.textContent = '-';
+                        button.classList.add('open');
+                    }
+                });
             });
         });
     </script>

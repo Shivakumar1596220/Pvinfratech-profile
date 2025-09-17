@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PV INFRATECH - Interactive Company Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Corporate & Sophisticated -->
     <!-- Application Structure Plan: The SPA is designed as a narrative journey. It starts with a strong Hero section to establish identity, followed by an "About Us" to build trust. The "Core Services" section uses a clean two-column layout to clearly define capabilities. The heart of the app is the "Interactive Project Dashboard," which allows users to filter projects by service type, transforming a static list into an engaging exploration tool. This is followed by data visualizations (Donut and Bar charts) to quantify the company's experience across sectors and services. A "Workflow" diagram, built with HTML/CSS, demystifies the process. The structure was chosen to guide the user from who the company is, to what they do, how they prove it (interactive data), and how they do it, creating a more persuasive and user-friendly experience than a linear document. -->
     <!-- Visualization & Content Choices: 
@@ -19,7 +16,7 @@
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             background-color: #f5f5f5; /* Light Gray */
         }
         .flow-step {
@@ -28,6 +25,12 @@
             justify-content: center;
             text-align: center;
             font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .flow-step:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
         }
         .flow-arrow {
             font-size: 2.5rem;
@@ -48,6 +51,31 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
+        .service-btn {
+            background-color: #e5e7eb;
+            color: #36454F;
+            border-radius: 9999px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .service-btn.active {
+            background-color: #36454F;
+            color: #F5F5F5;
+        }
+        @keyframes slideIn {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-in {
+            animation: slideIn 1s forwards;
+            animation-timing-function: ease-out;
+        }
+        .text-center-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     </style>
 </head>
 <body class="text-[#555B6E]">
@@ -58,12 +86,23 @@
             <div class="hidden md:flex space-x-6">
                 <a href="#about" class="nav-link font-semibold">About</a>
                 <a href="#services" class="nav-link font-semibold">Services</a>
+                <a href="#industries" class="nav-link font-semibold">Industries</a>
                 <a href="#projects" class="nav-link font-semibold">Projects</a>
                 <a href="#workflow" class="nav-link font-semibold">Workflow</a>
                 <a href="#contact" class="nav-link font-semibold">Contact</a>
             </div>
         </div>
     </nav>
+    
+    <div class="bg-[#36454F] py-16">
+        <div class="container mx-auto">
+            <div class="text-center-wrapper text-center p-10">
+                <h1 class="text-3xl text-[#F5F5F5] mb-2 animate-slide-in" style="animation-delay: 0s;">Welcome to</h1>
+                <h2 class="text-5xl font-extrabold text-[#D4B996] mb-2 animate-slide-in" style="animation-delay: 0.2s;">PV INFRATECH</h2>
+                <p class="text-xl text-[#F5F5F5] mb-10 animate-slide-in" style="animation-delay: 0.4s;">Aerial Survey Solutions</p>
+            </div>
+        </div>
+    </div>
 
     <main class="container mx-auto p-4 md:p-8">
 
@@ -76,55 +115,62 @@
 
         <section id="services" class="py-16 bg-white rounded-lg shadow-md">
             <h2 class="text-3xl font-bold text-center text-[#36454F] mb-12">Our Core Services</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-8">
-                <div class="border-l-4 border-[#d4b996] pl-6">
-                    <img src="https://placehold.co/100x100/A09E96/ffffff?text=DRONE+IMG" alt="Drone Survey" class="mb-4 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-bold text-[#36454F] mb-3">Drone Survey</h3>
-                    <p class="text-[#555B6E] mb-4">A safe, efficient, and cost-effective method for capturing high-resolution aerial data for a multitude of applications.</p>
-                    <ul class="list-disc list-inside space-y-2 text-[#555B6E]">
-                        <li>Aerial photography and videography</li>
-                        <li>3D modeling and photogrammetry</li>
-                        <li>Digital elevation models (DEM & DSM)</li>
-                        <li>Site progress monitoring and reporting</li>
-                    </ul>
-                </div>
-                <div class="border-l-4 border-[#d4b996] pl-6">
-                    <img src="https://placehold.co/100x100/A09E96/ffffff?text=DGPS+IMG" alt="DGPS Survey" class="mb-4 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-bold text-[#36454F] mb-3">DGPS Survey</h3>
-                    <p class="text-[#555B6E] mb-4">Utilizing advanced Differential Global Positioning System technology to achieve centimeter-level accuracy for large-scale and complex projects.</p>
-                    <ul class="list-disc list-inside space-y-2 text-[#555B6E]">
-                        <li>Land and topographic surveys</li>
-                        <li>Route and corridor surveys</li>
-                        <li>Volume and earthwork calculations</li>
-                        <li>Boundary and demarcation surveys</li>
-                    </ul>
-                </div>
-                 <div class="border-l-4 border-[#d4b996] pl-6">
-                    <img src="https://placehold.co/100x100/A09E96/ffffff?text=TOTAL+STATION+IMG" alt="Total Station Survey" class="mb-4 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-bold text-[#36454F] mb-3">Total Station Survey</h3>
-                    <p class="text-[#555B6E] mb-4">Highly precise equipment for a wide range of surveying and engineering tasks.</p>
-                    <ul class="list-disc list-inside space-y-2 text-[#555B6E]">
-                        <li>Boundary and land demarcation</li>
-                        <li>Stockpile volume calculation</li>
-                        <li>Column marking for construction projects</li>
-                    </ul>
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button class="service-btn" data-service="drone">Drone Survey and Mapping</button>
+                <button class="service-btn" data-service="dgps">DGPS Survey</button>
+                <button class="service-btn" data-service="totalstation">Total Station Survey</button>
+            </div>
+            <div id="service-details" class="px-8">
+            </div>
+        </section>
+        
+        <section id="industries" class="py-16">
+            <h2 class="text-3xl font-bold text-center text-[#36454F] mb-12">Industries We Serve</h2>
+            <div class="text-center mb-12">
+                <button id="showIndustriesBtn" class="bg-[#D4B996] text-[#36454F] font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">View Industries</button>
+            </div>
+            <div id="industries-details" class="hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-[#D4B996] mb-4">Infrastructure, Real Estate and Construction</h3>
+                        <p class="text-[#555B6E] text-sm mb-4">We provide precise surveying data that is critical for the planning, execution, and monitoring of large-scale construction and real estate projects.</p>
+                        <h4 class="font-bold text-[#36454F] mb-2">Services Include:</h4>
+                        <ul class="list-disc list-inside text-left mx-auto max-w-xs space-y-1 text-sm text-[#555B6E]">
+                            <li>Topography survey</li>
+                            <li>Contours</li>
+                            <li>Cut fill Volumes at given spot level</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-[#D4B996] mb-4">Utilities</h3>
+                        <p class="text-[#555B6E] text-sm mb-4">Our accurate geospatial data supports the efficient and safe development and maintenance of utility networks, from power lines to pipelines.</p>
+                        <h4 class="font-bold text-[#36454F] mb-2">Services Include:</h4>
+                        <ul class="list-disc list-inside text-left mx-auto max-w-xs space-y-1 text-sm text-[#555B6E]">
+                            <li>Route and corridor surveys for utilities</li>
+                            <li>As-built documentation</li>
+                            <li>Transmission line surveys</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-[#D4B996] mb-4">Mining and Exploration</h3>
+                        <p class="text-[#555B6E] text-sm mb-4">We deliver essential data for mining operations, helping to optimize resource extraction and ensure compliance with environmental regulations.</p>
+                        <h4 class="font-bold text-[#36454F] mb-2">Services Include:</h4>
+                        <ul class="list-disc list-inside text-left mx-auto max-w-xs space-y-1 text-sm text-[#555B6E]">
+                            <li>Volume calculations</li>
+                            <li>Boundary fixing</li>
+                            <li>Drone Survey</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="projects" class="py-16">
-            <h2 class="text-3xl font-bold text-center text-[#36454F] mb-4">Interactive Project Dashboard</h2>
-            <p class="text-center text-[#555B6E] mb-8 max-w-2xl mx-auto">We are proud to have partnered with a variety of clients to successfully complete projects across India. Explore our key collaborations by filtering by service type below.</p>
-
-            <div id="project-filters" class="flex flex-wrap justify-center gap-3 mb-8">
-                <button class="filter-btn active font-semibold py-2 px-4 rounded-full bg-white shadow" data-filter="all">All Projects</button>
-                <button class="filter-btn font-semibold py-2 px-4 rounded-full bg-white shadow" data-filter="Drone">Drone Survey</button>
-                <button class="filter-btn font-semibold py-2 px-4 rounded-full bg-white shadow" data-filter="Topography">Topography</button>
-                <button class="filter-btn font-semibold py-2 px-4 rounded-full bg-white shadow" data-filter="DGPS">DGPS</button>
-                <button class="filter-btn font-semibold py-2 px-4 rounded-full bg-white shadow" data-filter="3D Model">3D Model</button>
-                <button class="filter-btn font-semibold py-2 px-4 rounded-full bg-white shadow" data-filter="Total Station">Total Station</button>
+            <h2 class="text-3xl font-bold text-center text-[#36454F] mb-4">Project Portfolio</h2>
+            <p class="text-center text-[#555B6E] mb-8 max-w-2xl mx-auto">We are proud to have partnered with a variety of clients to successfully complete projects across India. Here is a selection of our key collaborations.</p>
+            <div class="text-center mb-12">
+                 <button id="showProjectsBtn" class="bg-[#D4B996] text-[#36454F] font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">View Our Projects</button>
             </div>
-
             <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             </div>
         </section>
@@ -133,15 +179,15 @@
         <section id="workflow" class="py-16">
             <h2 class="text-3xl font-bold text-center text-[#36454F] mb-12">Our Proven Project Workflow</h2>
             <div class="flex flex-col md:flex-row items-stretch justify-center gap-0">
-                <div class="flow-step flex-1 p-4 bg-[#F5F5F5] text-[#36454F] shadow-inner">1. Consultation</div>
-                <div class="flow-arrow text-[#D4B996] self-center mx-2 hidden md:block">→</div>
-                <div class="flow-step flex-1 p-4 bg-[#F5F5F5] text-[#36454F] shadow-inner">2. Planning</div>
-                <div class="flow-arrow text-[#D4B996] self-center mx-2 hidden md:block">→</div>
-                <div class="flow-step flex-1 p-4 bg-[#D4B996] text-[#36454F]">3. Data Acquisition</div>
-                <div class="flow-arrow text-[#8D6A46] self-center mx-2 hidden md:block">→</div>
-                <div class="flow-step flex-1 p-4 bg-[#36454F] text-[#F5F5F5]">4. Processing</div>
-                <div class="flow-arrow text-[#36454F] self-center mx-2 hidden md:block">→</div>
-                <div class="flow-step flex-1 p-4 bg-[#36454F] text-[#F5F5F5]">5. Delivery</div>
+                <div class="flow-step flex-1 p-4 bg-gray-100 text-gray-700">1. Consultation</div>
+                <div class="flow-arrow text-gray-400 self-center mx-2 hidden md:block">→</div>
+                <div class="flow-step flex-1 p-4 bg-gray-200 text-gray-800">2. Planning</div>
+                <div class="flow-arrow text-gray-400 self-center mx-2 hidden md:block">→</div>
+                <div class="flow-step flex-1 p-4 bg-gray-300 text-gray-800">3. Data Acquisition</div>
+                <div class="flow-arrow text-gray-500 self-center mx-2 hidden md:block">→</div>
+                <div class="flow-step flex-1 p-4 bg-gray-600 text-white">4. Processing</div>
+                <div class="flow-arrow text-gray-700 self-center mx-2 hidden md:block">→</div>
+                <div class="flow-step flex-1 p-4 bg-gray-800 text-white">5. Delivery</div>
             </div>
         </section>
 
@@ -155,16 +201,27 @@
             <div>
                 <p>M Vishnu</p>
                 <p class="text-sm text-[#D4B996] mb-2">Managing Director</p>
-                <p><a href="tel:+916379997578" class="hover:underline">+91 6379997578</a></p>
+                <p class="flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M164.9 24.6c-7.7-18.6-28-32.1-49.8-32.1C16.3 0 0 15.6 0 35.1V256c0 141.4 114.6 256 256 256s256-114.6 256-256V35.1c0-19.5-16.3-35.1-36-35.1c-21.8 0-42.1 13.5-49.8 32.1c-9.1 22.1-28.1 37.6-50.5 45c-29.3 9.4-56.6-1.5-68.5-20.9l-49.3-76.4l-49.3 76.4c-11.9 19.4-39.2 30.3-68.5 20.9c-22.4-7.4-41.4-22.8-50.5-45zM128 224a32 32 0 1 1 0-64a32 32 0 1 1 0 64zm64 0a32 32 0 1 1 0-64a32 32 0 1 1 0 64zm64-32a32 32 0 1 1 0 64c-17.7 0-32-14.3-32-32s14.3-32 32-32zm96 32a32 32 0 1 1 0-64a32 32 0 1 1 0 64zm64-32a32 32 0 1 1 0 64c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>
+                    <a href="tel:+916379997578" class="hover:underline">+91 6379997578</a>
+                </p>
             </div>
             <div>
                 <p>Devarakonda Shiva Kumar</p>
                 <p class="text-sm text-[#D4B996] mb-2">Managing Partner</p>
-                <p><a href="tel:+916300068048" class="hover:underline">+91 6300068048</a></p>
+                <p class="flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M164.9 24.6c-7.7-18.6-28-32.1-49.8-32.1C16.3 0 0 15.6 0 35.1V256c0 141.4 114.6 256 256 256s256-114.6 256-256V35.1c0-19.5-16.3-35.1-36-35.1c-21.8 0-42.1 13.5-49.8 32.1c-9.1 22.1-28.1 37.6-50.5 45c-29.3 9.4-56.6-1.5-68.5-20.9l-49.3-76.4l-49.3 76.4c-11.9 19.4-39.2 30.3-68.5 20.9c-22.4-7.4-41.4-22.8-50.5-45zM128 224a32 32 0 1 1 0-64a32 32 0 1 1 0 64zm64 0a32 32 0 1 1 0-64a32 32 0 1 1 0 64zm64-32a32 32 0 1 1 0 64c-17.7 0-32-14.3-32-32s14.3-32 32-32zm96 32a32 32 0 1 1 0-64a32 32 0 1 1 0 64zm64-32a32 32 0 1 1 0 64c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>
+                    <a href="tel:+916300068048" class="hover:underline">+91 6300068048</a>
+                </p>
             </div>
         </div>
         
-        <p class="mt-8 font-semibold text-lg">515, Allwyn x road, Miyapur, Hyderabad, Telangana</p>
+        <div class="mt-8 font-semibold text-lg flex flex-col items-center justify-center">
+            <p class="font-bold text-xl mb-2 underline text-[#36454F]">Address</p>
+            <p>515, Allwyn x road,</p>
+            <p>Miyapur, Hyderabad,</p>
+            <p>Telangana - 500049</p>
+        </div>
     </footer>
 
     <script>
@@ -183,38 +240,93 @@
             ];
             
             const projectGrid = document.getElementById('project-grid');
-            const filterButtons = document.querySelectorAll('.filter-btn');
-
-            function displayProjects(filter = 'all') {
+            const showProjectsBtn = document.getElementById('showProjectsBtn');
+            
+            function displayProjects() {
                 projectGrid.innerHTML = '';
-                const filteredProjects = filter === 'all' 
-                    ? projects 
-                    : projects.filter(p => p.tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase())));
-
-                filteredProjects.forEach(project => {
+                
+                projects.forEach(project => {
                     const projectCard = `
                         <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                             <h4 class="font-bold text-xl text-[#36454F]">${project.client}</h4>
                             <p class="text-[#555B6E] mt-2">${project.description}</p>
-                            <div class="mt-4 flex flex-wrap gap-2">
-                                ${project.tags.map(tag => `<span class="bg-[#F5F5F5] text-[#36454F] text-xs font-semibold px-2.5 py-0.5 rounded-full">${tag}</span>`).join('')}
-                            </div>
                         </div>
                     `;
                     projectGrid.innerHTML += projectCard;
                 });
             }
 
-            filterButtons.forEach(button => {
+            showProjectsBtn.addEventListener('click', () => {
+                displayProjects();
+                showProjectsBtn.classList.add('hidden');
+            });
+
+            const serviceButtons = document.querySelectorAll('.service-btn');
+            const serviceDetails = document.getElementById('service-details');
+
+            const services = {
+                drone: {
+                    title: 'Drone Survey and Mapping',
+                    image: 'https://placehold.co/100x100/A09E96/ffffff?text=DRONE+IMG',
+                    description: 'A safe, efficient, and cost-effective method for capturing high-resolution aerial data for a multitude of applications.',
+                    listItems: ['Aerial photography and videography', '3D modeling and photogrammetry', 'Digital elevation models (DEM & DSM)', 'Site progress monitoring and reporting']
+                },
+                dgps: {
+                    title: 'DGPS Survey',
+                    image: 'https://placehold.co/100x100/A09E96/ffffff?text=DGPS+IMG',
+                    description: 'Utilizing advanced Differential Global Positioning System technology to achieve centimeter-level accuracy for large-scale and complex projects.',
+                    listItems: ['Land and topographic surveys', 'Route and corridor surveys', 'Volume and earthwork calculations', 'Boundary and demarcation surveys']
+                },
+                totalstation: {
+                    title: 'Total Station Survey',
+                    image: 'https://placehold.co/100x100/A09E96/ffffff?text=TOTAL+STATION+IMG',
+                    description: 'Highly precise equipment for a wide range of surveying and engineering tasks.',
+                    listItems: ['Boundary and land demarcation', 'Stockpile volume calculation', 'Column marking for construction projects']
+                }
+            };
+
+            function displayService(service) {
+                const serviceData = services[service];
+                if (!serviceData) {
+                    serviceDetails.innerHTML = '';
+                    return;
+                }
+                const listHtml = serviceData.listItems.map(item => `<li class="text-[#555B6E]">${item}</li>`).join('');
+                serviceDetails.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-8">
+                        <div>
+                            <img src="${serviceData.image}" alt="${serviceData.title}" class="mb-4 rounded-lg shadow-md">
+                        </div>
+                        <div class="border-l-4 border-[#d4b996] pl-6">
+                            <h3 class="text-2xl font-bold text-[#36454F] mb-3">${serviceData.title}</h3>
+                            <p class="text-[#555B6E] mb-4">${serviceData.description}</p>
+                            <ul class="list-disc list-inside space-y-2">
+                                ${listHtml}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }
+
+            serviceButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    serviceButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
-                    displayProjects(button.dataset.filter);
+                    displayService(button.dataset.service);
                 });
             });
 
-            displayProjects();
+            // Initially display the first service
+            if (serviceButtons.length > 0) {
+                serviceButtons[0].click();
+            }
 
+            const showIndustriesBtn = document.getElementById('showIndustriesBtn');
+            const industriesDetails = document.getElementById('industries-details');
+            showIndustriesBtn.addEventListener('click', () => {
+                industriesDetails.classList.remove('hidden');
+                showIndustriesBtn.classList.add('hidden');
+            });
         });
     </script>
 </body>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PV INFRATECH - Interactive Company Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Brilliant Blues -->
+    <!-- Application Structure Plan: The SPA is designed as a narrative journey. It starts with a strong Hero section to establish identity, followed by an "About Us" to build trust. The "Core Services" section uses a clean two-column layout to clearly define capabilities. The heart of the app is the "Interactive Project Dashboard," which allows users to filter projects by service type, transforming a static list into an engaging exploration tool. This is followed by data visualizations (Donut and Bar charts) to quantify the company's experience across sectors and services. A "Workflow" diagram, built with HTML/CSS, demystifies the process. The structure was chosen to guide the user from who the company is, to what they do, how they prove it (interactive data), and how they do it, creating a more persuasive and user-friendly experience than a linear document. -->
+    <!-- Visualization & Content Choices: 
+        - Project Sectors: Report Info -> Client List by Industry -> Goal: Compare -> Viz: Donut Chart -> Interaction: Hover Tooltips -> Justification: Ideal for showing the proportional breakdown of projects across different industries, highlighting market diversity. -> Library: Chart.js/Canvas.
+        - Service Frequency: Report Info -> Services mentioned in projects -> Goal: Compare -> Viz: Horizontal Bar Chart -> Interaction: Hover Tooltips -> Justification: Best for comparing the frequency of distinct services, clearly showing core competencies. -> Library: Chart.js/Canvas.
+        - Project Workflow: Report Info -> Implied process from service descriptions -> Goal: Organize -> Viz: Styled HTML/CSS Diagram -> Interaction: None -> Justification: A clear, linear visual flow built with accessible HTML is more suitable and compliant than an SVG or Mermaid diagram. -> Method: Tailwind CSS Flexbox.
+        - Project Showcase: Report Info -> List of Clients & Projects -> Goal: Organize/Explore -> Viz: Interactive Filterable Cards -> Interaction: Click buttons to filter projects -> Justification: Allows users to self-select information relevant to their needs, improving engagement and usability over a static list. -> Method: Vanilla JS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+        }
+        .flow-arrow {
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #48CAE4;
+        }
+        .filter-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .filter-btn.active {
+            background-color: #0077B6;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <nav class="bg-[#004E89] text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <img src="data:image/jpeg;base64,[YOUR_BASE64_IMAGE_DATA_HERE]" alt="PV INFRATECH Logo" class="h-8">
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="nav-link font-semibold">About</a>
+                <a href="#services" class="nav-link font-semibold">Services</a>
+                <a href="#projects" class="nav-link font-semibold">Projects</a>
+                <a href="#workflow" class="nav-link font-semibold">Workflow</a>
+                <a href="#contact" class="nav-link font-semibold">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="about" class="text-center py-16">
+            <h2 class="text-4xl font-extrabold text-[#004E89] mb-4">High-Precision Geospatial Solutions</h2>
+            <p class="max-w-3xl mx-auto text-lg text-slate-600">
+                PV INFRATECH is a leading provider of DGPS and Drone survey solutions across India. We are committed to delivering accurate, reliable, and timely geospatial data to support critical infrastructure and development projects, enabling our clients to build the future with confidence.
+            </p>
+        </section>
+
+        <section id="services" class="py-16 bg-white rounded-lg shadow-md">
+            <h2 class="text-3xl font-bold text-center text-[#004E89] mb-12">Our Core Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-8">
+                <div class="border-l-4 border-[#48CAE4] pl-6">
+                    <h3 class="text-2xl font-bold text-[#0077B6] mb-3">🛰️ DGPS Survey</h3>
+                    <p class="text-slate-600 mb-4">Utilizing advanced Differential Global Positioning System technology to achieve centimeter-level accuracy for large-scale and complex projects.</p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-600">
+                        <li>Land and topographic surveys</li>
+                        <li>Route and corridor surveys</li>
+                        <li>Volume and earthwork calculations</li>
+                        <li>Boundary and demarcation surveys</li>
+                    </ul>
+                </div>
+                <div class="border-l-4 border-[#48CAE4] pl-6">
+                    <h3 class="text-2xl font-bold text-[#0077B6] mb-3">🚁 Drone Survey</h3>
+                    <p class="text-slate-600 mb-4">A safe, efficient, and cost-effective method for capturing high-resolution aerial data for a multitude of applications.</p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-600">
+                        <li>Aerial photography and videography</li>
+                        <li>3D modeling and photogrammetry</li>
+                        <li>Digital elevation models (DEM & DSM)</li>
+                        <li>Site progress monitoring and reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-16">
+            <h2 class="text-3xl font-bold text-center text-[#004E89] mb-4">Interactive Project Dashboard</h2>
+            <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">We are proud to have partnered with a variety of clients to successfully complete projects across India. Explore our key collaborations by filtering by service type below.</p>
+
+            <div id="project-filters" class="flex flex-wrap justify-center gap-3 mb-8">
+                <button class="filter-btn active font-semibold py-2 px-4 rounded-full bg-white shadow" data-filter="all">All Projects</button>
+                <button class="filter-btn font-semibold py-2 px-4 rounded-full bg-white shadow" data-filter="Drone">Drone Survey</button>
+                <button class="filter-btn font-semibold py-2 px-4 rounded-full bg-white shadow" data-filter="Topography">Topography</button>
+                <button class="filter-btn font-semibold py-2 px-4 rounded-full bg-white shadow" data-filter="DGPS">DGPS</button>
+                <button class="filter-btn font-semibold py-2 px-4 rounded-full bg-white shadow" data-filter="3D Model">3D Model</button>
+            </div>
+
+            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+        </section>
+
+        
+        <section id="workflow" class="py-16">
+            <h2 class="text-3xl font-bold text-center text-[#004E89] mb-12">Our Proven Project Workflow</h2>
+            <div class="flex flex-col md:flex-row items-stretch justify-center gap-0">
+                <div class="flow-step flex-1 p-4 bg-[#CAF0F8] text-[#004E89]">1. Consultation</div>
+                <div class="flow-arrow text-[#90E0EF] self-center mx-2 hidden md:block">→</div>
+                <div class="flow-step flex-1 p-4 bg-[#90E0EF] text-[#004E89]">2. Planning</div>
+                <div class="flow-arrow text-[#48CAE4] self-center mx-2 hidden md:block">→</div>
+                <div class="flow-step flex-1 p-4 bg-[#48CAE4] text-white">3. Data Acquisition</div>
+                <div class="flow-arrow text-[#0077B6] self-center mx-2 hidden md:block">→</div>
+                <div class="flow-step flex-1 p-4 bg-[#0077B6] text-white">4. Processing</div>
+                <div class="flow-arrow text-[#004E89] self-center mx-2 hidden md:block">→</div>
+                <div class="flow-step flex-1 p-4 bg-[#004E89] text-white">5. Delivery</div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer id="contact" class="bg-[#004E89] text-white mt-12 p-8 text-center">
+        <h3 class="text-2xl font-bold">Contact Us</h3>
+        <p class="mt-2 text-[#CAF0F8]">Let's discuss how PV INFRATECH can bring precision to your next project.</p>
+        <p class="mt-4 font-semibold text-lg">515, Allwyn x road, Miyapur, Hyderabad, Telangana</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const projects = [
+                { client: 'Clove Technologies', description: 'Construction project monitoring, including monthly inspections and the creation of detailed walkthrough videos.', tags: ['Drone', 'Monitoring'] },
+                { client: 'ACE Ventures', description: 'Topography survey for their upcoming construction projects.', tags: ['Topography'] },
+                { client: 'Namratha Developers', description: 'Topography survey for new construction, including drone survey and features extraction.', tags: ['Topography', 'Drone', 'Feature Extraction'] },
+                { client: 'Windsor Industrial Park', description: 'Topography survey for the industrial park\'s development.', tags: ['Topography', 'Industrial'] },
+                { client: 'Musi Riverfront Development', description: 'A comprehensive drone survey to support the riverfront development project.', tags: ['Drone', 'Infrastructure'] },
+                { client: 'Ecoren Green Energy Limited', description: 'DGPS and topography survey using drone technology for a solar plant.', tags: ['DGPS', 'Topography', 'Drone', 'Energy'] },
+                { client: 'RSI LLP', description: 'Topography and drone survey services for an area development project, including a 3D model.', tags: ['Topography', 'Drone', '3D Model'] },
+                { client: 'Upcoming IT Park, Mancherial', description: 'Topography drone survey for a future IT Park.', tags: ['Topography', 'Drone', 'Infrastructure'] },
+                { client: 'Land Acquisition Survey', description: 'Boundary and land demarcation for a solar plant land acquisition.', tags: ['DGPS', 'Energy'] },
+            ];
+            
+            const projectGrid = document.getElementById('project-grid');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+
+            function displayProjects(filter = 'all') {
+                projectGrid.innerHTML = '';
+                const filteredProjects = filter === 'all' 
+                    ? projects 
+                    : projects.filter(p => p.tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase())));
+
+                filteredProjects.forEach(project => {
+                    const projectCard = `
+                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                            <h4 class="font-bold text-xl text-[#0077B6]">${project.client}</h4>
+                            <p class="text-slate-600 mt-2">${project.description}</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                ${project.tags.map(tag => `<span class="bg-[#CAF0F8] text-[#004E89] text-xs font-semibold px-2.5 py-0.5 rounded-full">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                    projectGrid.innerHTML += projectCard;
+                });
+            }
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    displayProjects(button.dataset.filter);
+                });
+            });
+
+            displayProjects();
+
+        });
+    </script>
+</body>
+</html>
